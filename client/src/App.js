@@ -5,7 +5,7 @@ class Message extends React.Component {
   render() {
     return (
       <div className="Message">
-          <p> Message {this.props.did}: {this.props.txt}! </p>
+          <p> Message {this.props.did}: {this.props.content}! </p>
       </div>
     );
   }
@@ -35,7 +35,7 @@ class App extends React.Component {
   render() {
     if(this.state.messages) {
       return this.state.messages.map( (message) => (
-        <Message key={message.did} did={message.did} txt={message.message}/>
+        <Message key={message.did} did={message.did} content={message.content}/>
       ) );
     }
   }

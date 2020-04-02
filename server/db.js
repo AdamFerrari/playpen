@@ -11,7 +11,7 @@ function getDb() {
     if (_db) {
         return _db;
     }
-    _db = pgp('postgres://localhost:5432/tstdb');
+    _db = pgp('postgres://localhost:5432/playpen');
     console.log("DB initialized");
     return _db;
 }
