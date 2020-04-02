@@ -9,3 +9,9 @@ TO-DO:
 Setup:
 * npm install
 * PORT=3002 npm start
+
+
+Example:
+```
+curl -d "@sample_post.json" -cation/json" -X POST http://localhost:3002/messages/create
+```

@@ -3,7 +3,7 @@ CREATE DATABASE playpen ;
 -- \c playpen
 
 CREATE TABLE messages (
-    did         integer PRIMARY KEY,
+    did         SERIAL PRIMARY KEY,
     created_at  timestamp,
     user_id     varchar(256),
     content     text
@@ -12,4 +12,4 @@ CREATE TABLE messages (
 
 -- Example:
 -- INSERT INTO messages VALUES 
---     (1, CURRENT_TIMESTAMP, 'adam', 'This is the first test message.') ;
+--     (DEFAULT, CURRENT_TIMESTAMP, 'adam', 'This is a test.') ;

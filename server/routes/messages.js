@@ -6,7 +6,7 @@ var pg = db.getDb();
 
 /* GET a specific message. */
 router.get('/:messageId', function (req, res) {
-  var id = req.params.messageId;
+  let id = req.params.messageId;
   console.log('requesting message ' + id);
 
   pg.one('SELECT did, created_at, user_id, content FROM messages WHERE did = $1', id)
@@ -22,7 +22,7 @@ router.get('/:messageId', function (req, res) {
   })
   .catch(function (error) {
     console.log('ERROR:', error)
-    res.send('Error retrieving Message ' + id);
+    res.send('Error retrieving message ' + id);
   })
 });
 
@@ -37,7 +37,21 @@ router.get('/', function(req, res, next) {
   })
   .catch(function (error) {
     console.log('ERROR:', error)
-    res.send('Error retrieving Messages');
+    res.send('Error retrieving messages');
+  })
+});
+
+/* POST a new message. */
+router.post('/create', function (req, res) {
+  let msg = req.body;
+  console.log('creating message: user = ' + msg.user_id + ', content = ' + msg.content);
+  pg.none('INSERT INTO messages VALUES (DEFAULT, CURRENT_TIMESTAMP, $1, $2)', [msg.user_id, msg.content])
+  .then(function (data) {
+    res.send('OK');
+  })
+  .catch(function (error) {
+    console.log('ERROR:', error)
+    res.send('Error creating message');
   })
 });
 
