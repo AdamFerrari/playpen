@@ -13,5 +13,5 @@ Setup:
 
 Example:
 ```
-curl -d "@sample_post.json" -cation/json" -X POST http://localhost:3002/messages/create
+curl -d "@sample_post.json" -H "Content-Type: application/json" -X POST http://localhost:3002/messages/create
 ```
