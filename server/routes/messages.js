@@ -44,7 +44,7 @@ router.get('/', function(req, res, next) {
 /* POST a new message. */
 router.post('/create', function (req, res) {
   let msg = req.body;
-  console.log('creating message: user = ' + msg.user_id + ', content = ' + msg.content);
+  console.log('creating message: ' + JSON.stringify(msg));
   pg.none('INSERT INTO messages VALUES (DEFAULT, CURRENT_TIMESTAMP, $1, $2)', [msg.user_id, msg.content])
   .then(function (data) {
     res.send('OK');

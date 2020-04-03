@@ -5,7 +5,8 @@
 }
 
 .App {
-  text-align: center;
+  text-align: left;
+  padding-left: 50px;
 }
 
 .App-logo {
