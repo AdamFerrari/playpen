@@ -55,4 +55,18 @@ router.post('/create', function (req, res) {
   })
 });
 
+/* DELETE a specific message. */
+router.get('/delete/:messageId', function (req, res) {
+  let id = req.params.messageId;
+  console.log('deleting message ' + id);
+  pg.none('DELETE FROM messages WHERE did = $1', id)
+  .then(function (data) {
+    res.send('OK');
+  })
+  .catch(function (error) {
+    console.log('ERROR:', error)
+    res.send('Error deleting message ' + id);
+  })
+});
+
 module.exports = router;
