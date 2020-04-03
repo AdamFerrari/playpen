@@ -43,7 +43,8 @@ class CreateMessageForm extends React.Component {
       .then(
         (data) => {
           this.setState({ value: '' });
-          },
+          this.props.rerenderCallback();
+        },
         (error) => {
           this.setState({ error });
         }
@@ -69,9 +70,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {messages:[]}
+    this.rerenderCallback = this.rerenderCallback.bind(this);
   }
 
-  componentDidMount() {
+  fetchData() {
     fetch("http://localhost:3002/messages",
        { headers: { 'Content-Type': 'application/json'} }
     )
@@ -79,19 +81,31 @@ class App extends React.Component {
     .then(
       (data) => {
         this.setState({ messages: data });
-        },
+      },
       (error) => {
-          this.setState({ error });
-        }
+        this.setState({ error });
+       }
      )
+  }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  rerenderCallback() {
+    this.fetchData();
+    this.forceUpdate();
   }
 
   render() {
     if(this.state.messages) {
       return (
         <div className="App">
-          <CreateMessageForm />
-          { this.state.messages.map( (message) => (<Message key={message.did} did={message.did} content={message.content}/>) ) }
+          <CreateMessageForm rerenderCallback={this.rerenderCallback}/>
+          { this.state.messages.map(
+              (message) =>
+              (<Message key={message.did} did={message.did} content={message.content}/>)
+          ) }
         </div>
       );
     }
