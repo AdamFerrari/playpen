@@ -2,10 +2,32 @@ import React from 'react';
 import './App.css';
 
 class Message extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    /* alert('Clicked on : ' + this.props.did); */
+    fetch("http://localhost:3002/messages/delete/" + this.props.did,
+       { headers: { 'Content-Type': 'application/json'} }
+    )
+    .then(response => response.text())
+    .then(
+      (data) => {
+          this.props.rerenderCallback();
+      },
+      (error) => {
+        this.setState({ error });
+       }
+     )
+  }
+
   render() {
     return (
       <div className="Message">
-          <p> Message {this.props.did}: {this.props.content}</p>
+          <input type="button" value="x" onClick={this.handleClick} />
+          Message {this.props.did}: {this.props.content}
       </div>
     );
   }
@@ -104,7 +126,8 @@ class App extends React.Component {
           <CreateMessageForm rerenderCallback={this.rerenderCallback}/>
           { this.state.messages.map(
               (message) =>
-              (<Message key={message.did} did={message.did} content={message.content}/>)
+              (<Message key={message.did} did={message.did}
+                  content={message.content} rerenderCallback={this.rerenderCallback}/>)
           ) }
         </div>
       );
