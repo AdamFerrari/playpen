@@ -26,8 +26,10 @@ class Message extends React.Component {
   render() {
     return (
       <div className="Message">
-          <input type="button" value="x" onClick={this.handleClick} />
-          Message {this.props.did}: {this.props.content}
+          <input type="button" value="x" onClick={this.handleClick}
+               className="MessageDeleteButton"/>
+          <div className="MessageLabel">[Message {this.props.did}]:</div>
+          <div className="MessageBody">{this.props.content}</div>
       </div>
     );
   }
@@ -122,6 +124,8 @@ class App extends React.Component {
   render() {
     if(this.state.messages) {
       return (
+        <header className="App-header">
+
         <div className="App">
           <CreateMessageForm rerenderCallback={this.rerenderCallback}/>
           { this.state.messages.map(
@@ -130,6 +134,7 @@ class App extends React.Component {
                   content={message.content} rerenderCallback={this.rerenderCallback}/>)
           ) }
         </div>
+        </header>
       );
     }
   }
