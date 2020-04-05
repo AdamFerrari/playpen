@@ -5,11 +5,19 @@ CREATE DATABASE playpen ;
 CREATE TABLE messages (
     did         SERIAL PRIMARY KEY,
     created_at  timestamp,
-    user_id     varchar(256),
+    user_id     integer,
     content     text
+);
+
+CREATE TABLE users (
+    did         SERIAL PRIMARY KEY,
+    name        varchar(80),
+    token       text
 );
 
 
 -- Example:
+-- INSERT INTO users VALUES 
+--     (DEFAULT, 'adam', NULL);
 -- INSERT INTO messages VALUES 
---     (DEFAULT, CURRENT_TIMESTAMP, 'adam', 'This is a test.') ;
+--     (DEFAULT, CURRENT_TIMESTAMP, 1, 'This is a test.') ;

@@ -52,7 +52,7 @@ class CreateMessageForm extends React.Component {
     /* alert('A message was submitted: ' + this.state.value); */
     if(this.state.value) {
       let content = this.state.value;
-      let user_id = 'adam';
+      let user_id = 1;
       let body = { user_id: user_id, content: content };
       fetch("http://localhost:3002/messages/create",
        { 

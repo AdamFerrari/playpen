@@ -10,7 +10,8 @@ const cors = require('cors');
 // TO-DO: prune out any unneccessary add-ons
 
 var indexRouter = require('./routes/index');
-var messagesRouter = require('./routes/messages');
+var messageRouter = require('./routes/message');
+var userRouter = require('./routes/user');
 var db = require('./db');
 
 var app = express();
@@ -34,7 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/messages', messagesRouter);
+app.use('/messages', messageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
