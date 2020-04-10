@@ -1,5 +1,10 @@
 const jwt  = require('jsonwebtoken')
 
-function newAuthToken(user_id) {
-    return jwt.sign(user_id, 'playpensecret', {expiresIn: "7 days"})
+module.exports = {
+    newAuthToken
+}
+
+function newAuthToken(user_name) {
+    return jwt.sign({user_name: user_name},
+        'playpensecret', {expiresIn: "7 days"});
 }
